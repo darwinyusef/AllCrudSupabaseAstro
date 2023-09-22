@@ -1,0 +1,45 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { supabase } from "../../public/supabase";
+
+let { data: user, error } = await supabase.from("user").select("*");
+---
+
+<Layout title="Welcome to Astro.">
+  <main>
+    <div>
+      {
+        user.map((data) => (
+          <div>
+            <a href={`/found/${data.id}`}>
+              <span>{data.id}</span>
+            </a>
+            - <span>{data.uuid}</span> - <span>{data.name}</span> -
+            <a>
+              <a class="edit" href={`/actions?type=edit&id=${data.id}`}>
+                Editar
+              </a>
+            </a>
+            -
+            <span>
+              <a class="del" data-id={`${data.id}`}>
+                Eliminar
+              </a>
+            </span>
+          </div>
+        ))
+      }
+    </div>
+  </main>
+
+  <script src="../../public/delete.supabase.js"></script>
+</Layout>
+
+<style>
+  .edit {
+    color: lightblue;
+  }
+  .del {
+    color: lightsalmon;
+  }
+</style>

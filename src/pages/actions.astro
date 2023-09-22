@@ -1,0 +1,37 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Insert to Astro.">
+  <div class="container element">
+    <div class="row">
+      <form>
+        <div class="mb-3">
+          <label for="exampleFormControlTextarea1" class="form-label"
+            >Name</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="inputname"
+            placeholder="Your Name"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label"
+            >Email address</label
+          >
+          <input
+            type="email"
+            class="form-control"
+            id="inputemail"
+            placeholder="name@example.com"
+          />
+        </div>
+        <button class="btn btn-primary" id="sendForm">Enviar</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="../../public/actions.supabase.js"></script>
+</Layout>

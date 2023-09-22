@@ -1,0 +1,31 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { supabase } from "../../../public/supabase";
+export async function getStaticPaths() {
+  let { data: user, error } = await supabase.from("user").select("id");
+  const info = [];
+  user.map((ids) => {
+    info.push({ params: { id: ids.id } });
+  });
+
+  return info;
+}
+
+const { id } = Astro.params;
+let { data: user, error } = await supabase
+  .from("user")
+  .select("*")
+  .eq("id", id);
+---
+
+<Layout title="Welcome to Astro.">
+  <div>
+    {
+      user.map((data) => (
+        <div>
+            <span>{data.id}</span> - <span>{data.uuid}</span> - <span>{data.name}</span>
+        </div>
+      ))
+    }
+  </div>
+</Layout>
